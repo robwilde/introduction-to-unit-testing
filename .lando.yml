@@ -62,9 +62,11 @@ services:
   appserver:
     composer:
       phpunit/phpunit: '*'
+      robmorgan/phinx: '0.4.6'
     build:
       # Uncomment this when you have a composer.json in the root directory
-      - cd $LANDO_MOUNT && composer install
+      - cd $LANDO_MOUNT && composer update
+
     extras:
       - "apt-get update"
       - "apt-get upgrade -y"
@@ -81,6 +83,9 @@ tooling:
   phpunit:
     service: appserver
     description: "Run PHP Unit tests: lando phpunit"
+  phinx:
+    service: appserver
+    description: "Run Phinx to migrate the Database"
   npm:
     service: node-cli
   node:
